@@ -5,17 +5,24 @@ function init() {
     drawTarget();
 }
 
-// function onFrame(event) {
-//     drawCircles();
-// }
+function onMouseDown(event) {
+	drawTarget()
+}
 
 function drawTarget() {
     var circles = project.activeLayer.children;
-    var i = Math.round(Math.random() * circles.length);
+
+    /* first remove other target */
+    for (var i = 0; i < circles.length; i++) {
+        circles[i].fillColor = "#FF4136";
+    }
+
+
+    var i = Math.floor(Math.random() * circles.length);
     var target = circles[i];
     target.fillColor = "#2ECC40";
+    console.log(i);
 }
-
 
 function drawCircles() {
     var pi = Math.PI;

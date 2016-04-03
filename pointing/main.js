@@ -2,11 +2,19 @@ init();
 
 function init() {
     drawCircles();
+    drawTarget();
 }
 
 // function onFrame(event) {
 //     drawCircles();
 // }
+
+function drawTarget() {
+    var circles = project.activeLayer.children;
+    var i = Math.round(Math.random() * circles.length);
+    var target = circles[i];
+    target.fillColor = "#2ECC40";
+}
 
 
 function drawCircles() {
@@ -24,5 +32,5 @@ function drawCircles() {
 function drawCircle(x, y) {
     var SIZE = 30;
     var s = new Shape.Circle(x, y, SIZE);
-    s.fillColor = "red";
+    s.fillColor = "#FF4136";
 }

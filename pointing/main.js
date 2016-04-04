@@ -6,7 +6,52 @@ function init() {
 }
 
 function onMouseDown(event) {
-	drawTarget()
+    var clickPoint = event.point;
+    var target = getTarget();
+    var targetX = target.position.x;
+    var targetY = target.position.y;
+    var clickedX = clickPoint.x;
+    var clickedY = clickPoint.y;
+    var error;
+
+
+    if (target == null) {
+        console.log("Target is null and this shouldn't happen.");
+    }
+
+    if (target.contains(clickPoint)) {
+        console.log("Target hit.");
+        error = 0;
+    }
+    else {
+        var r = target.radius;
+        error = getDistance(targetX, clickedX, targetY, clickedY) - r;
+        console.log("Target missed. Error: " + error);
+    }
+
+    drawTarget()
+    return error;
+
+
+}
+
+function getDistance(x1, x2, y1, y2) {
+    var a = x1 - x2;
+    var b = y1 - y2;
+
+    return Math.sqrt(a*a + b*b);
+}
+
+function getTarget() {
+    var circles = project.activeLayer.children;
+
+    for (var i = 0; i < circles.length; i++) {
+        if (circles[i].fillColor == "#2ECC40") {
+            return circles[i];
+        }
+    }
+
+    return null;
 }
 
 function drawTarget() {
@@ -21,7 +66,6 @@ function drawTarget() {
     var i = Math.floor(Math.random() * circles.length);
     var target = circles[i];
     target.fillColor = "#2ECC40";
-    console.log(i);
 }
 
 function drawCircles() {

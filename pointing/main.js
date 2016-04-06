@@ -1,5 +1,12 @@
-init();
 var errors = [];
+
+window.onresize = redoDrawing;
+var resizeTimeout = 0;
+
+function redoDrawing(event) {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(init, 500);
+}
 
 function init() {
     drawCircles(30);
@@ -28,6 +35,7 @@ function onMouseDown(event) {
         error = getDistance(targetX, clickedX, targetY, clickedY) - r;
         console.log("Target missed. Error: " + error);
         errors.push(error);
+        drawFailed(target);
         updateScore();
     }
 
@@ -69,15 +77,36 @@ function switchTarget(oldTarget) {
 }
 
 function drawAnimated(target) {
-    // var s = target.clone();
-    // s.data.isTarget = false
     var s = new Shape.Circle(target.position.x, target.position.y, target.radius)
     s.fillColor = target.fillColor;
     s.animationCircle = true;
     s.opacity = 1;
 }
 
-function onFrame(event) {
+function drawFailed(target) {
+    var s = new Shape.Circle(target.position.x, target.position.y, target.radius)
+    s.fillColor = "#FF4136"; // red "failure" color
+    s.animationCircle = true;
+    s.opacity = 1;
+}
+
+function fixResize(event) {
+    /* checks to see if we're resizing and then if so we fix it */
+    /* runs every frame */
+
+    if (event.count == 0) {
+        init();
+    } else if (resizeTimeout != 0 && project.activeLayer.opacity > 0.06) {
+        console.log(project.activeLayer.opacity);
+        project.activeLayer.opacity -= 0.06;
+    } else if (resizeTimeout == 0 && project.activeLayer.opacity < 1) {
+        console.log(project.activeLayer.opacity);
+        project.activeLayer.opacity += 0.5;
+    }
+}
+
+function drawCircleAnimations() {
+    /* animation */
     var toRemove = []
     var circles = project.activeLayer.children;
     for (var i = 0; i < circles.length; i++) {
@@ -99,6 +128,13 @@ function onFrame(event) {
         toRemove[i].remove()
     }
 
+}
+
+function onFrame(event) {
+
+    fixResize(event); // handle any resizing issues dynamically
+
+    drawCircleAnimations();
 }
 
 function onResize(event) {
@@ -136,18 +172,23 @@ function drawCircles(size) {
         drawCircle(x, y, size);
     }
 
+    setTarget(size);
+
+}
+
+function setTarget(size) {
     // set one circle to be a target
     var circles = project.activeLayer.children;
     var targetIndex = Math.floor(Math.random() * circles.length);
     var target = project.activeLayer.children[targetIndex];
     target.data.isTarget = true;
     target.fillColor = "#2ECC40";
-
 }
 
 function drawCircle(x, y, size) {
     var s = new Shape.Circle(x, y, size);
     s.fillColor = "#f4f4f4";
+
     s.data.isTarget = false;
     s.clicked = false;
     s.animationCircle = false;

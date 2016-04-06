@@ -1,5 +1,4 @@
 init();
-
 function init() {
     drawCircles(30);
 }
@@ -13,13 +12,13 @@ function onMouseDown(event) {
     var clickedY = clickPoint.y;
     var error;
 
-
     if (target == null) {
         console.log("Target is null and this shouldn't happen.");
     }
 
     if (target.contains(clickPoint)) {
         console.log("Target hit.");
+        drawAnimated(target);
         error = 0;
     }
     else {
@@ -28,14 +27,70 @@ function onMouseDown(event) {
         console.log("Target missed. Error: " + error);
     }
 
-    drawTarget();
+    switchTarget(target);
 
     return error;
 
 }
 
+function switchTarget(oldTarget) {
+    var circles = project.activeLayer.children;
+
+    // first reset oldTarget back to normal circle
+    oldTarget.fillColor = "#FF4136"
+    oldTarget.data.isTarget = false;
+
+    var targetIndex = Math.floor(Math.random() * circles.length);
+    var target = project.activeLayer.children[targetIndex];
+
+    // if the new one is the same as the old one,
+    while (target === oldTarget || target.animationCircle == true) {
+        var targetIndex = Math.floor(Math.random() * circles.length);
+        target = project.activeLayer.children[targetIndex];
+    }
+
+    target.data.isTarget = true;
+    target.fillColor = "#2ECC40";
+}
+
+function drawAnimated(target) {
+    // var s = target.clone();
+    // s.data.isTarget = false
+    var s = new Shape.Circle(target.position.x, target.position.y, target.radius)
+    s.fillColor = target.fillColor;
+    s.animationCircle = true;
+    s.opacity = 1;
+}
+
+function onFrame(event) {
+    var toRemove = []
+    var circles = project.activeLayer.children;
+    for (var i = 0; i < circles.length; i++) {
+        // check if there's a circle to animate
+        if (circles[i].animationCircle) {
+            // if the circle is not finished animating
+            if (circles[i].opacity > 0.06) {
+                circles[i].opacity -= 0.06;
+                circles[i].scale(1.02);
+            }
+            // if the circle is finished animating
+            else {
+                toRemove.push(circles[i])
+            }
+        }
+    }
+
+    for(var i = 0; i < toRemove.length; i++){
+        console.log(getTarget())
+        console.log("removing: " + toRemove[i].id)
+        toRemove[i].remove()
+    }
+
+}
+
 function onResize(event) {
-    drawCircles(30);
+    project.activeLayer.children = [];
+    init();
 }
 
 function getDistance(x1, x2, y1, y2) {
@@ -49,27 +104,11 @@ function getTarget() {
     var circles = project.activeLayer.children;
 
     for (var i = 0; i < circles.length; i++) {
-        if (circles[i].fillColor == "#2ECC40") {
+        if (circles[i].data.isTarget) {
             return circles[i];
         }
     }
-
     return null;
-}
-
-function drawTarget() {
-    var circles = project.activeLayer.children;
-
-    /* first remove other target */
-    for (var i = 0; i < circles.length; i++) {
-        circles[i].fillColor = "#FF4136";
-    }
-
-    var i = Math.floor(Math.random() * circles.length);
-    var target = circles[i];
-    target.fillColor = "#2ECC40";
-
-    return target;
 }
 
 function drawCircles(size) {
@@ -84,11 +123,21 @@ function drawCircles(size) {
         drawCircle(x, y, size);
     }
 
-    drawTarget();
+    // set one circle to be a target
+    var circles = project.activeLayer.children;
+    var targetIndex = Math.floor(Math.random() * circles.length);
+    var target = project.activeLayer.children[targetIndex];
+    target.data.isTarget = true;
+    target.fillColor = "#2ECC40";
+
 }
 
 function drawCircle(x, y, size) {
-    // var SIZE = 30;
     var s = new Shape.Circle(x, y, size);
     s.fillColor = "#FF4136";
+    s.data.isTarget = false;
+    s.clicked = false;
+    s.animationCircle = false;
+
+    return s;
 }

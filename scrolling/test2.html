@@ -1,0 +1,92 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Scrolling Test 2</title>
+  <meta name="description" content="Scrolling Test for Interaction Techniques">
+  <meta name="author" content="westin@cmu.edu">
+  <script src="lorem.js"></script>
+  <link rel="stylesheet" href="reset.css">
+  <style type="text/css">
+    body {
+      margin: 40px auto;
+      max-width: 500px;
+      line-height: 1.4;
+      font-size: 1em;
+      /*color: #444;*/
+      padding: 0 10px;
+      font-family: arial,sans-serif;
+    }
+
+    h1{
+      font-size: 18px;
+       color: #1a0dab;
+    }
+
+    h2{
+      color: #006621;
+      font-size: 14px;
+    }
+    h3{
+      color: #545454;
+      font-size: small;
+    }
+
+    .result {
+      margin-bottom: 23px;
+    }
+
+    #target.result {
+      text-decoration: line-through;
+    }
+
+  </style>
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  <script>
+  var lorem = new Lorem;
+  lorem.type = Lorem.TEXT;
+  var totalResults = 100
+  var targetNumber = Math.floor(Math.random() * (totalResults - 1 + 1)) + 1;
+  console.log("User must click on element " + (targetNumber - 1))
+  for(i=0; i < totalResults; i++){
+    var result = document.createElement("div");
+    result.className = "result"
+    if(i == targetNumber){
+      result.id = "target"
+    }
+
+    var h1 = document.createElement("h1");
+    lorem.query = '3-6w';
+    h1.innerHTML = lorem.createLorem()
+
+    var h2 = document.createElement("h2");
+    lorem.query = '1-3w';
+    h2.innerHTML = 'www.' + lorem.createLorem().replace(/\s/g, '') + '.com'
+
+    var h3 = document.createElement("h3");
+    lorem.query = '2-4s';
+    h3.innerHTML = lorem.createLorem()
+
+
+    result.appendChild(h1)
+    result.appendChild(h2)
+    result.appendChild(h3)
+    document.getElementsByTagName('body')[0].appendChild(result);
+  }
+  </script>
+  <!-- <div class="result">
+    <h1>Hello From the Same Side – The New Inquiry</h1>
+    <h2>thenewinquiry.com/essays/hello-from-the-same-side/</h2>
+    <h3>margin-ad-right AS 2015 draws to a close, among the two biggest US media spectacles that are not mass shootings are Adele's single “Hello” ...</h3>
+  </div> -->
+
+</body>
+</html>

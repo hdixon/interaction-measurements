@@ -7,7 +7,7 @@ body {
 
 #targets {
   margin: 4em auto 0 auto;
-  max-width: 650px;
+  max-width: 680px;
   padding: 0 10px;
 }
 
@@ -27,13 +27,12 @@ em {
 }
 
 .row {
-  padding: 1em 0 1em 0;
+  padding: 0.5em 0 0.5em 0;
   display: flex;
   justify-content: space-between;
 }
 
 .row:nth-child(2n+2){
-  background-color:
 }
 
 .left, .middle, .right {
@@ -42,15 +41,14 @@ em {
   width: 100%;
   padding: 0.5em;
   border-radius: 3px;
-}
-
-.middle {
-  margin: 0 1em 0 1em;
+  margin: 0 0.7em 0 0.7em;
 }
 
 .number {
-  position: absolute;
+  /*position: absolute;
+  font-weight: bold;*/
   font-weight: bold;
+  margin: 0.5em;
 }
 
 .position {
@@ -59,4 +57,6 @@ em {
   text-align: center;
   width: 100%;
   display: inline-block;
+  text-transform: uppercase;
+  font-weight: bold;
 }

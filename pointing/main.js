@@ -2,7 +2,6 @@ init();
 
 function init() {
     drawCircles(30);
-    drawTarget();
 }
 
 function onMouseDown(event) {
@@ -29,7 +28,7 @@ function onMouseDown(event) {
         console.log("Target missed. Error: " + error);
     }
 
-    drawTarget()
+    drawTarget();
 
     return error;
 
@@ -84,6 +83,8 @@ function drawCircles(size) {
         var y = cy + Math.sin(i) * 150;
         drawCircle(x, y, size);
     }
+
+    drawTarget();
 }
 
 function drawCircle(x, y, size) {

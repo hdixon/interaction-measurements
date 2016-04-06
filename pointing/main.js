@@ -1,7 +1,7 @@
 init();
 
 function init() {
-    drawCircles();
+    drawCircles(30);
     drawTarget();
 }
 
@@ -30,9 +30,13 @@ function onMouseDown(event) {
     }
 
     drawTarget()
+
     return error;
 
+}
 
+function onResize(event) {
+    drawCircles(30);
 }
 
 function getDistance(x1, x2, y1, y2) {
@@ -62,13 +66,15 @@ function drawTarget() {
         circles[i].fillColor = "#FF4136";
     }
 
-
     var i = Math.floor(Math.random() * circles.length);
     var target = circles[i];
     target.fillColor = "#2ECC40";
+
+    return target;
 }
 
-function drawCircles() {
+function drawCircles(size) {
+    project.activeLayer.children = []; // delete any circles we might have already
     var pi = Math.PI;
     var cx = view.bounds.width / 2;
     var cy = view.bounds.height / 2;
@@ -76,12 +82,12 @@ function drawCircles() {
     for (var i = 0; i < pi * 2; i += pi / 5) {
         var x = cx + Math.cos(i) * 150;
         var y = cy + Math.sin(i) * 150;
-        drawCircle(x, y);
+        drawCircle(x, y, size);
     }
 }
 
-function drawCircle(x, y) {
-    var SIZE = 30;
-    var s = new Shape.Circle(x, y, SIZE);
+function drawCircle(x, y, size) {
+    // var SIZE = 30;
+    var s = new Shape.Circle(x, y, size);
     s.fillColor = "#FF4136";
 }

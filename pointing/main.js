@@ -52,7 +52,7 @@ function switchTarget(oldTarget) {
     var circles = project.activeLayer.children;
 
     // first reset oldTarget back to normal circle
-    oldTarget.fillColor = "#FF4136"
+    oldTarget.fillColor = "#f4f4f4"
     oldTarget.data.isTarget = false;
 
     var targetIndex = Math.floor(Math.random() * circles.length);
@@ -147,7 +147,7 @@ function drawCircles(size) {
 
 function drawCircle(x, y, size) {
     var s = new Shape.Circle(x, y, size);
-    s.fillColor = "#FF4136";
+    s.fillColor = "#f4f4f4";
     s.data.isTarget = false;
     s.clicked = false;
     s.animationCircle = false;

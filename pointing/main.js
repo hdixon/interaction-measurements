@@ -1,4 +1,6 @@
 init();
+var errors = [];
+
 function init() {
     drawCircles(30);
 }
@@ -25,12 +27,25 @@ function onMouseDown(event) {
         var r = target.radius;
         error = getDistance(targetX, clickedX, targetY, clickedY) - r;
         console.log("Target missed. Error: " + error);
+        errors.push(error);
+        updateScore();
     }
 
     switchTarget(target);
+}
 
-    return error;
+function updateScore() {
+    console.log(arrAvg(errors));
+}
 
+function arrAvg(a) {
+    var sum = 0;
+
+    for (var i = 0; i < a.length; i++) {
+        sum += a[i];
+    }
+
+    return sum / a.length;
 }
 
 function switchTarget(oldTarget) {
@@ -81,8 +96,6 @@ function onFrame(event) {
     }
 
     for(var i = 0; i < toRemove.length; i++){
-        console.log(getTarget())
-        console.log("removing: " + toRemove[i].id)
         toRemove[i].remove()
     }
 

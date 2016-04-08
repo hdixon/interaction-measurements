@@ -1,5 +1,9 @@
-Interaction Techniques Final Project
+_Interaction Techniques Final Project_
 
-Westin Lohne, Max Harlynking, Henry Dixon, Eileen Jiang
+_Westin Lohne, Max Harlynking, Henry Dixon, Eileen Jiang_
 
-Spring 2016
+_Spring 2016_
+
+__Files__
+
+[4/6 Interim Report](https://docs.google.com/document/d/1ooGU8PtBHSAEaw0pwE8ps9a6Ql0EpBSfJxlLM-Ne7VM/edit?usp=sharing)

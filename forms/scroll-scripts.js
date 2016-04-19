@@ -12,6 +12,7 @@ jQuery(document).ready(function($) {
         $(".touch").hide();
         $(".desktop").show();
         $("#altInputMethod").slideUp();
+        $(".scrollMethod").slideDown();
         break;
       case "Laptop Trackpad":
         $(".keyboard").hide();
@@ -19,6 +20,7 @@ jQuery(document).ready(function($) {
         $(".desktop").hide();
         $(".laptop").show();
         $("#altInputMethod").slideUp();
+        $(".scrollMethod").slideDown();
         break;
       case "Keyboard":
         $(".touch").hide();
@@ -26,6 +28,7 @@ jQuery(document).ready(function($) {
         $(".laptop").hide();
         $(".keyboard").show();
         $("#altInputMethod").slideUp();
+        $(".scrollMethod").slideDown();
         break;
       case "Touch-Enabled Device":
         $(".desktop").hide();
@@ -33,15 +36,15 @@ jQuery(document).ready(function($) {
         $(".keyboard").hide();
         $(".touch").show();
         $("#altInputMethod").slideUp();
+        $(".scrollMethod").slideDown();
         break;
       case "Other":
-        $(".hide").slideUp();
-        $("#mouse").slideDown();
         $("#altInputMethod").slideDown();
+        $(".scrollMethod").slideUp();
         break;
       default:
-        $(".hide").slideUp();
         $("#altInputMethod").slideUp();
+        $(".scrollMethod").slideUp();
     }
   });
   $("#scrollMethod").change(function(){

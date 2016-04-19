@@ -11,31 +11,46 @@ jQuery(document).ready(function($) {
         $(".keyboard").hide();
         $(".touch").hide();
         $(".desktop").show();
+        $("#altInputMethod").slideUp();
         break;
       case "Laptop Trackpad":
         $(".keyboard").hide();
         $(".touch").hide();
         $(".desktop").hide();
         $(".laptop").show();
+        $("#altInputMethod").slideUp();
         break;
       case "Keyboard":
         $(".touch").hide();
         $(".desktop").hide();
         $(".laptop").hide();
         $(".keyboard").show();
+        $("#altInputMethod").slideUp();
         break;
       case "Touch-Enabled Device":
         $(".desktop").hide();
         $(".laptop").hide();
         $(".keyboard").hide();
         $(".touch").show();
+        $("#altInputMethod").slideUp();
         break;
       case "Other":
         $(".hide").slideUp();
         $("#mouse").slideDown();
+        $("#altInputMethod").slideDown();
         break;
       default:
         $(".hide").slideUp();
+        $("#altInputMethod").slideUp();
+    }
+  });
+  $("#scrollMethod").change(function(){
+    switch($("#scrollMethod option:selected").text()){
+      case "Other":
+        $("#altInputMethod").slideDown();
+        break;
+      default:
+        $("#altInputMethod").slideUp();
     }
   });
   var parens = /\(([^)]+)\)/;
@@ -71,6 +86,7 @@ jQuery(document).ready(function($) {
     window.sessionStorage.setItem("participant", $("#participant option:selected").text());
     window.sessionStorage.setItem("inputDevice", $("#inputDevice option:selected").text());
     window.sessionStorage.setItem("scrollMethod", $("#scrollMethod option:selected").text());
+    window.sessionStorage.setItem("altScroll", $("#altScroll").val());
     window.sessionStorage.setItem("model", $("#model").val());
     window.sessionStorage.setItem("os", $("#os").text());
     window.sessionStorage.setItem("browser", $("#browser").text());

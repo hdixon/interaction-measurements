@@ -1,0 +1,219 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>interaction-measurements</title>
+    <meta name="description" content="Improvements on current HCI tests.">
+    <link rel="stylesheet" href="reset.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700,500,600' rel='stylesheet' type='text/css'>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Source Sans Pro', "Helvetica", arial, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            transition: all 150ms ease-out;
+        }
+
+        a:visited {
+            color:inherit;
+        }
+
+        a:hover {
+            color: #999;
+        }
+
+        ul {
+            list-style: none;
+            font-family: 'Source Sans Pro';
+            font-size: 12px;
+            margin-top: 2em;
+        }
+
+        li {
+            font-size: 1em;
+        }
+
+        div {
+          box-sizing: border-box !important;
+        }
+
+        h2 {
+            font-family: 'Source Sans Pro';
+            font-size: 40px;
+            display: block;
+            clear: both;
+            color: #2d2d2d;
+            margin-top: 0.3em;
+        }
+
+        #container {
+            text-align: center;
+            width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 120px;
+            /*display: flex;
+            align-items: flex-end;*/
+            height: 450px;
+        }
+
+        #scrolling {
+          height: 450px;
+          width: calc(650px - 65%);
+          background-color: red;
+          position: relative;
+          float: left;
+          margin-right: 0.5em;
+          background: #FFFFFF;
+          /*box-shadow: 0px 0px 31px 0px rgba(56,216,255,0.13);*/
+          /*margin-right: 1em;*/
+          color: #39D9FF;
+          padding: 2em;
+          text-align: left;
+        }
+
+        #scrolling img {
+          width: 40%;
+        }
+
+        #scrolling h2 {
+          color: #2d2d2d;
+          margin-top: 0.3em;
+        }
+
+        #scrolling ul {
+          font-family: 'Source Sans Pro';
+          font-size: 12px;
+          margin-top: 2em;
+        }
+
+        #scrolling li {
+          margin: 2em 0 2em 0;
+        }
+
+        #scrolling a {
+          color: white;
+          padding: 0.5em;
+          background-color: #39D9FF;
+        }
+
+        #scrolling a:hover {
+          text-decoration: underline;
+        }
+
+        #description {
+          height: 60%;
+          /*background-color: red;*/
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        #description p {
+          /* Interaction Techniqu: */
+          padding: 2em;
+          /* Type something: */
+          font-family: 'Source Code Pro';
+          letter-spacing: 0.3px;
+          font-size: 14px;
+          color: #656565;
+          line-height: 45px;
+          text-align: left;
+        }
+
+        #description em {
+          font-weight: 700;
+        }
+
+        #description a {
+          color: #BDBDBD;
+          text-decoration: underline;
+        }
+        #pointing {
+          width: calc(650px - 35% - 1em);
+          background-color: blue;
+          height: 40%;
+          position: relative;
+          float: right;
+          bottom: 0;
+          padding: 1.5em;
+          /* Rectangle 57: */
+          background: #FFFFFF;
+          /*box-shadow: 0px 0px 57px 0px rgba(79,227,194,0.13);*/
+          color: #50E3C2;
+          text-align: left
+        }
+
+        #pointing img {
+          float: left;
+          height: 60%;
+        }
+
+        #pointing h2{
+          float: left;
+        }
+
+        #pointing ul {
+          position: absolute;
+          right: 1.5em;
+          bottom: 0em;
+        }
+
+        #pointing li {
+          margin: 2em 0 2em 0;
+        }
+
+        #pointing a {
+          color: #fff;
+          padding: 0.7em;
+          background-color: #50E3C2;
+          transition: all 200ms ease-out;
+          border: 1px solid rgba(79, 227, 194, 0);
+          /*text-decoration: underline;*/
+        }
+
+        #pointing a:hover {
+          /*background-color: #fff;*/
+          /*text-decoration: none;*/
+          text-decoration: underline;
+          transform: scaleX(1.5);
+          /*color: #50E3C2;*/
+          /*border: 1px solid #50E3C2;*/
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="container">
+      <div id="scrolling">
+        <img src="scrolling.svg">
+        <h2>Scrolling</h2>
+        <ul>
+            <li><a href="scrolling/test1.html">Seek for image in article test</a></li>
+            <li><a href="scrolling/test2.html">Seek for link in list test</a></li>
+            <li><a href="scrolling/test3.html">Predefined seek in list test</a></li>
+          </ul>
+      </div>
+      <div id="description">
+        <p><em>Interaction Technique Measurement Tools</em><br> 2016 - Carnegie Mellon University<br>
+<a href="http://github.com/hdixon">Harold R. Dixon</a>, <a href="http://github.com/harlynkingm">Maximilian O. Harlynking</a>, <a href="http://github.com/Totofufu">Eileen Jiang</a>, <a href="http://github.com/westin">Westin T.W. Lohne</a></p>
+      </div>
+      <div id="pointing">
+        <img src="pointing.svg">
+        <h2>Pointing</h2>
+          <ul>
+              <li><a href="pointing/index.html">Circular Fitt's Law Test</a></li>
+            </ul>
+      </div>
+
+    </div>
+</body>
+
+</html>

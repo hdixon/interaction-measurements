@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="skeleton.css">
   <link rel="stylesheet" href="styles.css">
   <script type="text/javascript" src="jquery-1.12.3.min.js"></script>
-  <script type="text/javascript" src="scripts.js"></script>
+  <script type="text/javascript" src="fitts-scripts.js"></script>
 </head>
 <body style="background-color:#eee">
 
@@ -31,16 +31,18 @@
       <h5>Preliminary Information Form</h5>
     </div>
     <form id="userInfo" style="margin-top:30px">
-      <div>
-        <label for="yourName" class="eight columns">Your Name</label>
-        <label for="andrewID" class="four columns">Andrew ID</label>
+      <div class="row">
+        <div class="six columns">
+          <label for="yourName">Your Name</label>
+          <input class="u-full-width" id="yourName" placeholder="ex. Gerald Montgomery" required>
+        </div>
+        <div class="six columns">
+          <label for="andrewID">Andrew ID</label>
+          <input class="u-full-width" id="andrewID" placeholder="ex. gmontgo" required>
+        </div>
       </div>
       <div class="row">
-        <input class="eight columns" id="yourName" placeholder="ex. Gerald Montgomery" required>
-        <input class="four columns" id="andrewID" placeholder="ex. gmontgo" required>
-      </div>
-      <label for="userType">Participant Type</label>
-      <div class="row">
+        <label for="userType">Participant Type</label>
         <select class="u-full-width" id="participant" required>
           <option>Select...</option>
           <option value="self">Yourself</option>
@@ -49,8 +51,8 @@
           <option value="extra">Extra</option>
         </select>
       </div>
-      <label for="inputDevice">Input Method</label>
       <div class="row">
+        <label for="inputDevice">Input Method</label>
         <select class="u-full-width" id="inputDevice" required>
           <option>Select...</option>
           <option value="mouse">Mouse</option>
@@ -67,21 +69,25 @@
           <input class="u-full-width" id="model" placeholder='ex. Logitech M510'>
         </div>
       </div>
-      <div>
-        <label class="six columns">Operating System</label>
-        <label class="six columns">Browser</label>
+      <div class="row">
+        <div class="six columns">
+          <label>Operating System</label>
+          <div id="os"></div>
+        </div>
+        <div class="six columns">
+          <label>Browser</label>
+          <div id="browser"></div>
+        </div>
       </div>
       <div class="row">
-        <div class="six columns" id="os"></div>
-        <div class="six columns" id="browser"></div>
-      </div>
-      <div>
-        <label class="six columns">Screen Width (pixels)</label>
-        <label class="six columns">Screen Height (pixels)</label>
-      </div>
-      <div class="row">
-        <div class="six columns" id="width"></div>
-        <div class="six columns" id="height"></div>
+        <div class="six columns">
+          <label>Screen Width (pixels)</label>
+          <div id="width"></div>
+        </div>
+        <div class="six columns">
+          <label>Screen Height (pixels)</label>
+          <div id="height"></div>
+        </div>
       </div>
       <div class="row" style="text-align:center">
         <input type="submit" value="Begin Test" style="line-height:0px;font-size:18px;padding:20px;margin-top:20px">

@@ -1,39 +1,34 @@
-function calculateSize(){
-  var aspectX = 16;
-  var aspectY = 9;
-  var aspectDiagonal = pythagorean(aspectX, aspectY);
-  var diagonal = 15; //change later
-  if (diagonal > 0){
-    var factor = diagonal / aspectDiagonal;
-    var width = aspectX * factor;
-    var height = aspectY * factor;
-    // output x
-    // output y
-  }
-}
-
-function pythagorean(x, y){
-  return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-}
-
 jQuery(document).ready(function($) {
+  $(".laptop").hide();
+  $(".keyboard").hide();
+  $(".touch").hide();
+  $(".desktop").hide();
+  
   $("#inputDevice").change(function(){
     switch($("#inputDevice option:selected").text()){
       case "Mouse":
-        $(".hide").slideUp();
-        $("#mouse").slideDown();
+        $(".laptop").hide();
+        $(".keyboard").hide();
+        $(".touch").hide();
+        $(".desktop").show();
         break;
-      case "Phone":
-        $(".hide").slideUp();
-        $("#mouse").slideDown();
+      case "Laptop Trackpad":
+        $(".keyboard").hide();
+        $(".touch").hide();
+        $(".desktop").hide();
+        $(".laptop").show();
         break;
-      case "Tablet":
-        $(".hide").slideUp();
-        $("#mouse").slideDown();
+      case "Keyboard":
+        $(".touch").hide();
+        $(".desktop").hide();
+        $(".laptop").hide();
+        $(".keyboard").show();
         break;
-      case "Stylus":
-        $(".hide").slideUp();
-        $("#mouse").slideDown();
+      case "Touch-Enabled Device":
+        $(".desktop").hide();
+        $(".laptop").hide();
+        $(".keyboard").hide();
+        $(".touch").show();
         break;
       case "Other":
         $(".hide").slideUp();
@@ -75,6 +70,7 @@ jQuery(document).ready(function($) {
     window.sessionStorage.setItem("andrewID", $("#andrewID").val());
     window.sessionStorage.setItem("participant", $("#participant option:selected").text());
     window.sessionStorage.setItem("inputDevice", $("#inputDevice option:selected").text());
+    window.sessionStorage.setItem("scrollMethod", $("#scrollMethod option:selected").text());
     window.sessionStorage.setItem("model", $("#model").val());
     window.sessionStorage.setItem("os", $("#os").text());
     window.sessionStorage.setItem("browser", $("#browser").text());

@@ -18,7 +18,6 @@ function pythagorean(x, y){
 
 jQuery(document).ready(function($) {
   $("#inputDevice").change(function(){
-    console.log($("#inputDevice option:selected").text());
     switch($("#inputDevice option:selected").text()){
       case "Mouse":
         $(".hide").slideUp();
@@ -70,7 +69,17 @@ jQuery(document).ready(function($) {
   $("#width").text(screen.width);
   $("#height").text(screen.height);
   
-  $("#userInfo").submit(function(){
-    
+  $("#userInfo").submit(function(e){
+    e.preventDefault();
+    window.sessionStorage.setItem("fullName", $("#yourName").val());
+    window.sessionStorage.setItem("andrewID", $("#andrewID").val());
+    window.sessionStorage.setItem("participant", $("#participant option:selected").text());
+    window.sessionStorage.setItem("inputDevice", $("#inputDevice option:selected").text());
+    window.sessionStorage.setItem("model", $("#model").val());
+    window.sessionStorage.setItem("os", $("#os").text());
+    window.sessionStorage.setItem("browser", $("#browser").text());
+    window.sessionStorage.setItem("width", $("#width").text());
+    window.sessionStorage.setItem("height", $("#height").text());
+    console.log(window.sessionStorage);
   });
 });

@@ -1,7 +1,31 @@
+// weird that the distances aren't the same; fitts law equation is based on distances
+// we can calculate but weird
+// differentiate horizontal vs vertical movement
+// 2d grid
+// 1) establish metrics (time and accuracy & horizontal/vertical & fatigue & ??)
+// auto detect systems during onboarding
+
+
+// scrolling
+// to compare between desktop/phone: fixed-sized document vs fixed-size inches
+// 2D scrolling -- MAP
+
 var errors = [];
 
-window.onresize = redoDrawing;
+// window.onresize = redoDrawing;
 var resizeTimeout = 0;
+
+var score = new PointText(new Point(100, 100));
+score.justification = 'left';
+score.fillColor = 'black';
+score.content = "0";
+
+console.log(score);
+
+function updateScore() {
+    var avgErr = Math.round(arrAvg(errors));
+    score.content = avgErr;
+}
 
 function redoDrawing(event) {
     clearTimeout(resizeTimeout);
@@ -40,10 +64,6 @@ function onMouseDown(event) {
     }
 
     switchTarget(target);
-}
-
-function updateScore() {
-    console.log(arrAvg(errors));
 }
 
 function arrAvg(a) {

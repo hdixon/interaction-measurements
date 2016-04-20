@@ -118,7 +118,7 @@ function onMouseDown(event) {
         doCrosshair();
     } else {
       window.sessionStorage.setItem("distanceResults", results);
-      window.location.href = "scroll-results.html"
+      window.location.href = "http://hdixon.io/interaction-measurements/scroll-results.html"
     }
 
 }

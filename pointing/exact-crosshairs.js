@@ -2,11 +2,19 @@
 /* ######## Globals ######## */
 /* ######################### */
 
+// store trial
+trial = 0;
+
 // store all errors
 errors = [];
 
 // constant list of points to move the cursor to
-points = []
+var p1 = [1/4, 1/4]; // top left
+var p2 = [3/4, 1/4]; // top right
+var p3 = [1/4, 3/4]; // bottom left
+var p4 = [3/4, 3/4]; // bottom right
+var p5 = [1/2, 1/2]; // center
+points = [p1, p2, p3, p4, p5];
 
 /* ######################### */
 /* ######## Helpers ######## */
@@ -34,25 +42,40 @@ function arrAvg(a) {
 /* ######################### */
 
 function init() {
-    // get the point we're going to draw the crosshair
-    var crosshairPoint = getCurrentPoint();
-    drawCrosshair(crosshairPoint)
+    doCrosshair();
 }
 
-function onResize(event) {
+init();
 
+function doCrosshair() {
+    var crosshairPoint = getCurrentPoint(trial);
+    console.log("trial: " + trial);
+    console.log("points[trial]: " + points[trial])
+    console.log(crosshairPoint);
+
+    drawCrosshair(crosshairPoint.x, crosshairPoint.y);
 }
 
-function getCurrentPoint() {
-    // get current point
-    // check if there is no more points, then test is done
+function getCurrentPoint(trial) {
+    // else, calculate point
+    var cw = view.bounds.width;
+    var ch = view.bounds.height;
+    var px = points[trial][0] * cw;
+    var py = points[trial][1] * ch;
+    var p = new Point(px, py);
+    return p;
 }
 
 /* ######################### */
 /* ######### View ########## */
 /* ######################### */
 
+function clearCanvas() {
+    project.activeLayer.children = [];
+}
+
 function drawCrosshair(x, y) {
+    clearCanvas();
     var cw = view.bounds.width;
     var ch = view.bounds.height;
 
@@ -82,11 +105,6 @@ function drawCrosshair(x, y) {
     outerCircle.fillColor = 'rgba(2, 2, 2, 0.05)';
 }
 
-drawCrosshair(200, 200);
-
-function onFrame(event) {
-
-}
 
 /* ######################### */
 /* ###### Controller ####### */
@@ -94,11 +112,19 @@ function onFrame(event) {
 
 function onMouseDown(event) {
     var clickPoint = event.point;
-    var crosshairPoint = getCurrentPoint();
+    var crosshairPoint = getCurrentPoint(trial);
     var x1 = event.point.x;
     var y1 = event.point.y;
-    var x2 = event.point.x;
-    var y2 = event.point.y;
+    var x2 = crosshairPoint.x;
+    var y2 = crosshairPoint.y;
     var distance = getDistance(x1, x2, y1, y2);
+    console.log(distance);
+
+    if (trial < points.length - 1) {
+        trial += 1;
+        doCrosshair();
+    } else {
+        console.log("DONE!");
+    }
 
 }

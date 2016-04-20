@@ -11,6 +11,12 @@ jQuery(document).ready(function($) {
   window.sessionStorage.setItem("seen2", time2.sinceTargetSeen);
   window.sessionStorage.setItem("seen3", time3.sinceTargetSeen);
   window.sessionStorage.setItem("seen4", time4.sinceTargetSeen);
+  var clicks = window.sessionStorage.getItem('distanceResults').split(',');
+  window.sessionStorage.setItem("click1", clicks[0]);
+  window.sessionStorage.setItem("click2", clicks[1]);
+  window.sessionStorage.setItem("click3", clicks[2]);
+  window.sessionStorage.setItem("click4", clicks[3]);
+  window.sessionStorage.setItem("click5", clicks[4]);
   
   request = $.ajax({
       url: "https://script.google.com/macros/s/AKfycbz6j0HGj0D6E0qiqD8o9XIEW5wzTgkeBvnhQ32PamLoog-wonAu/exec",
@@ -23,7 +29,7 @@ jQuery(document).ready(function($) {
 
   var times = [time1.totalTime, time2.totalTime, time3.totalTime, time4.totalTime];
   var sinceTargetSeen = [time1.sinceTargetSeen, time2.sinceTargetSeen, time3.sinceTargetSeen, time4.sinceTargetSeen];
-  var data = {
+  var scrollData = {
     labels: lbls,
     datasets: [
       {
@@ -36,8 +42,22 @@ jQuery(document).ready(function($) {
       }
     ]
   };
+  console.log(window.sessionStorage.getItem('distanceResults'));
+  
+  var clickData = {
+    labels: [1, 2, 3, 4, 5],
+    datasets: [
+      {
+        label: "Click Accuracy",
+        data: clicks
+      }
+    ]
+  };
 
-  var ctx = document.getElementById("resultsChart").getContext("2d");
-  var chart = new Chart(ctx, {type:"line", data:data});
+  var sCtx = document.getElementById("scrollResultsChart").getContext("2d");
+  var chart = new Chart(sCtx, {type:"line", data:scrollData});
+  
+  var cCtx = document.getElementById("clickResultsChart").getContext("2d");
+  var chart2 = new Chart(cCtx, {type: "line", data:clickData});
   
 });

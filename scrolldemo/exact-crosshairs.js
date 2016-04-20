@@ -117,7 +117,8 @@ function onMouseDown(event) {
         trial += 1;
         doCrosshair();
     } else {
-        console.log("DONE!");
+      window.sessionStorage.setItem("distanceResults", results);
+      window.location.href = "scroll-results.html"
     }
 
 }

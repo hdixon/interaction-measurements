@@ -97,6 +97,6 @@ jQuery(document).ready(function($) {
     window.sessionStorage.setItem("width", $("#width").text());
     window.sessionStorage.setItem("height", $("#height").text());
 //    console.log(window.sessionStorage);
-    window.location.href = "interaction-measurements/tests/1.html"
+    window.location.href = "/interaction-measurements/tests/1.html"
   });
 });

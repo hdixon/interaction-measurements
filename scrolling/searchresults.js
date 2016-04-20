@@ -1,4 +1,4 @@
-
+var targetFirstSeen = -1;
 var searchResults = [{title: "donec ultrices tincidunt arcu", url: "www.aenean.com", desc: "Blandit cursus risus at ultrices mi tempus imperdiiquam ultrices sagittis orci a scelerisque purus. At imperdiet dui accumsan sit."}
 , {title: "integer enim neque volutpat ac tincidunt", url: "www.cum.com", desc: "Nullam non nisi est sit amet. Id neque aliquam vesit amet nulla facilisi morbi tempus iaculis urna."}
 , {title: "aenean euismod elementum nisi quis eleifend", url: "www.laoreetsuspendisseinterdum.com", desc: "At imperdiet dui accumsan sit. Adipiscing elit duim sit amet nisl suscipit adipiscing bibendum est."}

@@ -56,8 +56,9 @@ function drawCrosshair(x, y) {
     var cw = view.bounds.width;
     var ch = view.bounds.height;
 
-    var black = "rgba(2, 2, 2, 0.6)";
+    var black = "rgba(2, 2, 2, 1)";
     var strokeWidth = 1;
+    var circleRadius = 15;
 
     var h1 = new Point(0, y);
     var h2 = new Point(cw, y);
@@ -68,22 +69,17 @@ function drawCrosshair(x, y) {
     var v1 = new Point(x, 0);
     var v2 = new Point(x, ch);
     var vertical = new Path.Line(v1, v2);
-    vertical.strokeColor = black;
+    vertical.strokeColor = 'black';
     vertical.strokeWidth = strokeWidth;
 
-    var circle = new Path.Circle({
-    center: new Point(x, y),
-    radius: 60
-    });
+    var innerCircle = new Shape.Circle(x, y, circleRadius);
+    innerCircle.fillColor = 'rgba(2, 2, 2, 0.4)';
 
-    circle.fillColor = {
-        gradient: {
-            stops: [[black, 0.1], ['rgba(0,0,0,0.3)', 0.8], ['rgba(0,0,0,0)', 1]],
-            radial: true
-        },
-        origin: circle.position,
-        destination: circle.bounds.rightCenter
-    };
+    var middleCircle = new Shape.Circle(x, y, circleRadius * 2);
+    middleCircle.fillColor = 'rgba(2, 2, 2, 0.1)';
+
+    var outerCircle = new Shape.Circle(x, y, circleRadius * 4);
+    outerCircle.fillColor = 'rgba(2, 2, 2, 0.05)';
 }
 
 drawCrosshair(200, 200);

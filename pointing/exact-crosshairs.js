@@ -6,7 +6,7 @@
 trial = 0;
 
 // store all errors
-errors = [];
+results = [];
 
 // constant list of points to move the cursor to
 var p1 = [1/4, 1/4]; // top left
@@ -14,7 +14,11 @@ var p2 = [3/4, 1/4]; // top right
 var p3 = [1/4, 3/4]; // bottom left
 var p4 = [3/4, 3/4]; // bottom right
 var p5 = [1/2, 1/2]; // center
-points = [p1, p2, p3, p4, p5];
+var p6 = [1/8, 1/8];
+var p7 = [7/8, 1/8];
+var p8 = [1/8, 7/8];
+var p9 = [7/8, 7/8];
+points = [p1, p2, p3, p4, p5, p6, p7, p8, p9];
 
 /* ######################### */
 /* ######## Helpers ######## */
@@ -27,15 +31,6 @@ function getDistance(x1, x2, y1, y2) {
     return Math.sqrt(a*a + b*b);
 }
 
-function arrAvg(a) {
-    var sum = 0;
-
-    for (var i = 0; i < a.length; i++) {
-        sum += a[i];
-    }
-
-    return sum / a.length;
-}
 
 /* ######################### */
 /* ######### Model ######### */
@@ -49,15 +44,10 @@ init();
 
 function doCrosshair() {
     var crosshairPoint = getCurrentPoint(trial);
-    console.log("trial: " + trial);
-    console.log("points[trial]: " + points[trial])
-    console.log(crosshairPoint);
-
     drawCrosshair(crosshairPoint.x, crosshairPoint.y);
 }
 
 function getCurrentPoint(trial) {
-    // else, calculate point
     var cw = view.bounds.width;
     var ch = view.bounds.height;
     var px = points[trial][0] * cw;
@@ -92,7 +82,7 @@ function drawCrosshair(x, y) {
     var v1 = new Point(x, 0);
     var v2 = new Point(x, ch);
     var vertical = new Path.Line(v1, v2);
-    vertical.strokeColor = 'black';
+    vertical.strokeColor = black;
     vertical.strokeWidth = strokeWidth;
 
     var innerCircle = new Shape.Circle(x, y, circleRadius);
@@ -118,7 +108,8 @@ function onMouseDown(event) {
     var x2 = crosshairPoint.x;
     var y2 = crosshairPoint.y;
     var distance = getDistance(x1, x2, y1, y2);
-    console.log(distance);
+    results.push(distance);
+    console.log(results);
 
     if (trial < points.length - 1) {
         trial += 1;

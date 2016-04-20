@@ -11,14 +11,14 @@ results = [];
 // constant list of points to move the cursor to
 var p1 = [1/4, 1/4]; // top left
 var p2 = [3/4, 1/4]; // top right
-var p3 = [1/4, 3/4]; // bottom left
-var p4 = [3/4, 3/4]; // bottom right
+var p3 = [3/4, 3/4]; // bottom right
+var p4 = [1/4, 3/4]; // bottom left
 var p5 = [1/2, 1/2]; // center
 var p6 = [1/8, 1/8];
 var p7 = [7/8, 1/8];
 var p8 = [1/8, 7/8];
 var p9 = [7/8, 7/8];
-points = [p1, p2, p3, p4, p5, p6, p7, p8, p9];
+points = [p1, p2, p3, p4, p5];
 
 /* ######################### */
 /* ######## Helpers ######## */
@@ -101,6 +101,8 @@ function drawCrosshair(x, y) {
 /* ######################### */
 
 function onMouseDown(event) {
+    /* TODO:
+        FLASH BACKGROUND */
     var clickPoint = event.point;
     var crosshairPoint = getCurrentPoint(trial);
     var x1 = event.point.x;

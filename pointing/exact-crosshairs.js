@@ -52,22 +52,41 @@ function getCurrentPoint() {
 /* ######### View ########## */
 /* ######################### */
 
-function drawCircle(x, y, size) {
-    var s = new Shape.Circle(x, y, size);
-    s.fillColor = "#f4f4f4";
+function drawCrosshair(x, y) {
+    var cw = view.bounds.width;
+    var ch = view.bounds.height;
 
-    s.data.isTarget = false;
-    s.clicked = false;
-    s.animationCircle = false;
+    var black = "rgba(2, 2, 2, 0.6)";
+    var strokeWidth = 1;
 
-    return s;
+    var h1 = new Point(0, y);
+    var h2 = new Point(cw, y);
+    var horizontal = new Path.Line(h1, h2);
+    horizontal.strokeColor = black;
+    horizontal.strokeWidth = strokeWidth;
+
+    var v1 = new Point(x, 0);
+    var v2 = new Point(x, ch);
+    var vertical = new Path.Line(v1, v2);
+    vertical.strokeColor = black;
+    vertical.strokeWidth = strokeWidth;
+
+    var circle = new Path.Circle({
+    center: new Point(x, y),
+    radius: 60
+    });
+
+    circle.fillColor = {
+        gradient: {
+            stops: [[black, 0.1], ['rgba(0,0,0,0.3)', 0.8], ['rgba(0,0,0,0)', 1]],
+            radial: true
+        },
+        origin: circle.position,
+        destination: circle.bounds.rightCenter
+    };
 }
 
-function drawCrosshair(crosshairPoint) {
-    var x = crosshairPoint.x;
-    var y = crosshairPoint.y;
-
-}
+drawCrosshair(200, 200);
 
 function onFrame(event) {
 

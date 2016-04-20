@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Scrolling Test 2</title>
+    <title>1</title>
     <meta name="description" content="Scrolling Test for Interaction Techniques">
     <meta name="author" content="westin@cmu.edu">
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
@@ -76,9 +76,8 @@
 
 <body>
     <script>
-        var targetNumbers = [1, 2, 3, 4, 5, 6]
-        var totalResults = 100
-        var targetNumber = Math.floor(Math.random() * (totalResults - 1 + 10)) + 10;
+        var startTime = new Date().getTime();
+        var targetNumber = 47;
         console.log("User must click on element " + (targetNumber - 1))
         for (i = 0; i < searchResults.length; i++) {
             var result = document.createElement("div");
@@ -177,7 +176,11 @@
                 // current time - when the target first entered the viewport - 1000 timeout for selecting the target
                 // PS there is a margin of error of about +- up to 8ms due to how the page loads
                 var totalTimeSinceTargetSeen = new Date().getTime() - targetFirstSeen - 1000
+                var totalTimeSinceTestStart = new Date().getTime() - startTime - 1000
                 console.log("Selected target after", totalTimeSinceTargetSeen, "ms")
+                console.log("It took a total of", totalTimeSinceTestStart, "ms to select it")
+                window.sessionStorage.setItem("test1", JSON.stringify({totalTime: totalTimeSinceTestStart, sinceTargetSeen: totalTimeSinceTargetSeen}));
+                window.location.href = "/tests/2.html"
             }
         }, 1000);
 

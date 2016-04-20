@@ -97,11 +97,6 @@ jQuery(document).ready(function($) {
     window.sessionStorage.setItem("width", $("#width").text());
     window.sessionStorage.setItem("height", $("#height").text());
 //    console.log(window.sessionStorage);
-    request = $.ajax({
-        url: "https://script.google.com/macros/s/AKfycbz6j0HGj0D6E0qiqD8o9XIEW5wzTgkeBvnhQ32PamLoog-wonAu/exec",
-        type: "get",
-        data: window.sessionStorage
-    });
     window.location.href = "/tests/1.html"
   });
 });

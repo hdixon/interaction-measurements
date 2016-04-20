@@ -1,92 +1,169 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <title>Scrolling Test 2</title>
-  <meta name="description" content="Scrolling Test for Interaction Techniques">
-  <meta name="author" content="westin@cmu.edu">
-  <script src="lorem.js"></script>
-  <link rel="stylesheet" href="reset.css">
-  <style type="text/css">
-    body {
-      margin: 40px auto;
-      max-width: 500px;
-      line-height: 1.4;
-      font-size: 1em;
-      /*color: #444;*/
-      padding: 0 10px;
-      font-family: arial,sans-serif;
-    }
+    <title>Scrolling Test 2</title>
+    <meta name="description" content="Scrolling Test for Interaction Techniques">
+    <meta name="author" content="westin@cmu.edu">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="searchresults.js"></script>
+    <link rel="stylesheet" href="reset.css">
+    <style type="text/css">
+        body {
+            margin: 40px auto;
+            max-width: 400px;
+            line-height: 1.4;
+            font-size: 1em;
+            /*color: #444;*/
+            padding: 0 10px;
+            font-family: arial, sans-serif;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
-    h1{
-      font-size: 18px;
-       color: #1a0dab;
-    }
+        h1 {
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: 18px;
+            color: #1a0dab;
+        }
 
-    h2{
-      color: #006621;
-      font-size: 14px;
-    }
-    h3{
-      color: #545454;
-      font-size: small;
-    }
+        h2 {
+            color: #006621;
+            font-size: 14px;
+        }
 
-    .result {
-      margin-bottom: 23px;
-    }
+        h3 {
+            color: #545454;
+            font-size: small;
+        }
 
-    #target.result {
-      text-decoration: line-through;
-    }
+        .result {
+            margin-bottom: 23px;
+            max-height: 116px;
+            overflow: hidden;
+        }
 
-  </style>
+        #target.result {
+            background-color: rgba(126,210,33,0.8);
+            border-radius: 3px;
+        }
 
-  <!--[if lt IE 9]>
+        #targetContainer {
+            position: fixed;
+            width: 100vw;
+            border: 4px solid rgba(126,210,33,1);
+            border-left: none;
+            border-right: none;
+            height: 125px;
+            display: block;
+            top: 50vh;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+
+    <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 </head>
 
 <body>
-  <script>
-  var lorem = new Lorem;
-  lorem.type = Lorem.TEXT;
-  var totalResults = 100
-  var targetNumber = Math.floor(Math.random() * (totalResults - 1 + 1)) + 1;
-  console.log("User must click on element " + (targetNumber - 1))
-  for(i=0; i < totalResults; i++){
-    var result = document.createElement("div");
-    result.className = "result"
-    if(i == targetNumber){
-      result.id = "target"
-    }
+    <script>
+        var targetNumbers = [1, 2, 3, 4, 5, 6]
+        var totalResults = 100
+        var targetNumber = Math.floor(Math.random() * (totalResults - 1 + 1)) + 1;
+        console.log("User must click on element " + (targetNumber - 1))
+        for (i = 0; i < searchResults.length; i++) {
+            var result = document.createElement("div");
+            result.className = "result"
+            if (i == targetNumber) {
+                result.id = "target"
+            }
 
-    var h1 = document.createElement("h1");
-    lorem.query = '3-6w';
-    h1.innerHTML = lorem.createLorem()
+            var h1 = document.createElement("h1");
+            h1.innerHTML = searchResults[i].title
 
-    var h2 = document.createElement("h2");
-    lorem.query = '1-3w';
-    h2.innerHTML = 'www.' + lorem.createLorem().replace(/\s/g, '') + '.com'
+            var h2 = document.createElement("h2");
+            h2.innerHTML = searchResults[i].url
 
-    var h3 = document.createElement("h3");
-    lorem.query = '2-4s';
-    h3.innerHTML = lorem.createLorem()
+            var h3 = document.createElement("h3");
+            h3.innerHTML = searchResults[i].desc
+
+            result.appendChild(h1)
+            result.appendChild(h2)
+            result.appendChild(h3)
+            document.getElementsByTagName('body')[0].appendChild(result);
+        }
+        console.log("Document height: ", $(document).height(), "px")
 
 
-    result.appendChild(h1)
-    result.appendChild(h2)
-    result.appendChild(h3)
-    document.getElementsByTagName('body')[0].appendChild(result);
-  }
-  </script>
-  <!-- <div class="result">
+        var overlaps = (function() {
+            function getPositions(elem) {
+                var pos, width, height;
+                pos = $(elem).offset()
+                width = $(elem).width();
+                height = $(elem).height();
+                return [
+                    [pos.left, pos.left + width],
+                    [pos.top, pos.top + height]
+                ];
+            }
+
+            function comparePositions(target, container) {
+                return target[0] > container[0] && target[1] < container[1]
+            }
+
+            return function(a, b) {
+                var pos1 = getPositions(a),
+                    pos2 = getPositions(b);
+                return comparePositions(pos1[1], pos2[1]);
+            };
+        })();
+    </script>
+    <!-- <div class="result">
     <h1>Hello From the Same Side – The New Inquiry</h1>
     <h2>thenewinquiry.com/essays/hello-from-the-same-side/</h2>
     <h3>margin-ad-right AS 2015 draws to a close, among the two biggest US media spectacles that are not mass shootings are Adele's single “Hello” ...</h3>
   </div> -->
+    <div id="targetContainer"></div>
+    <script>
+        // waits until a user is done scrolling, then calls
+        // a specified function
+        $.fn.scrollEnd = function(callback, timeout) {
+            $(this).scroll(function() {
+                var $this = $(this);
+                if ($this.data('scrollTimeout')) {
+                    clearTimeout($this.data('scrollTimeout'));
+                }
+                $this.data('scrollTimeout', setTimeout(callback, timeout));
+            });
+        };
 
+        $(window).scrollEnd(function() {
+          if (overlaps("#target", "#targetContainer")) {
+              console.log("overlappin")
+          }
+        }, 1000);
+
+
+        function checkIfOverlaps() {
+            setInterval(function() {
+              if (overlaps("#target", "#targetContainer")) {
+                  $("#targetContainer").css("background-color", "rgba(126,210,33,0.3)")
+              } else {
+                $("#targetContainer").css("background-color", "rgba(126,210,33,0)")
+              }
+            }, 250)
+        }
+        checkIfOverlaps()
+    </script>
 </body>
+
 </html>

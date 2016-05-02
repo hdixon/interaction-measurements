@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Practice</title>
+    <meta name="description" content="Scrolling Test for Interaction Techniques">
+    <meta name="author" content="westin@cmu.edu">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="reset.css">
+    <script async type="text/javascript" src="paper-full.min.js"></script>
+    <script async type="text/javascript" src="jquery.mousewheel.min.js"></script>
+    <script async type="text/paperscript" src="multidirectional.js" canvas="background"></script>
+    <style type="text/css">
+        canvas {
+            position: absolute;
+            max-width: 100%;
+            height: 100vh;
+            width: 100vw;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-size: cover;
+            background-color: #FFF;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="background" hipi="on" resize="true" keepalive="true"></canvas>
+</body>
+
+</html>

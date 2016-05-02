@@ -26,9 +26,6 @@ function pointAt(x1, y1, x2, y2) {
 
     var x = Math.cos(angle);
     var y = Math.sin(angle);
-    console.log(x);
-    console.log(y);
-    console.log(x + y);
 
     return [x, y];
 }

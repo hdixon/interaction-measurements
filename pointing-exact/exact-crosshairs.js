@@ -6,7 +6,9 @@
 trial = 0;
 
 // store all errors
-results = [];
+results = {};
+results.times = []; // time from mouse movement to click
+results.delta = []; // error distance
 
 // constant list of points to move the cursor to
 var p1 = [1/4, 1/4]; // top left
@@ -19,6 +21,7 @@ var p7 = [7/8, 1/8];
 var p8 = [1/8, 7/8];
 var p9 = [7/8, 7/8];
 points = [p1, p2, p3, p4, p5];
+
 
 /* ######################### */
 /* ######## Helpers ######## */
@@ -39,8 +42,6 @@ function getDistance(x1, x2, y1, y2) {
 function init() {
     doCrosshair();
 }
-
-init();
 
 function doCrosshair() {
     var crosshairPoint = getCurrentPoint(trial);
@@ -65,34 +66,41 @@ function clearCanvas() {
 }
 
 function drawCrosshair(x, y) {
+    // clears canvas, draws a crosshair at x, y
+    // stores the time we draw the crosshairs
+
     clearCanvas();
+
     var cw = view.bounds.width;
     var ch = view.bounds.height;
 
     var black = "rgba(2, 2, 2, 1)";
     var strokeWidth = 1;
-    var circleRadius = 15;
+    var circleRadius = 10;
 
+    // draw horizontal line
     var h1 = new Point(0, y);
     var h2 = new Point(cw, y);
     var horizontal = new Path.Line(h1, h2);
     horizontal.strokeColor = black;
     horizontal.strokeWidth = strokeWidth;
 
+    // draw vertical line
     var v1 = new Point(x, 0);
     var v2 = new Point(x, ch);
     var vertical = new Path.Line(v1, v2);
     vertical.strokeColor = black;
     vertical.strokeWidth = strokeWidth;
 
+    // draw circles
     var innerCircle = new Shape.Circle(x, y, circleRadius);
     innerCircle.fillColor = 'rgba(2, 2, 2, 0.4)';
-
-    var middleCircle = new Shape.Circle(x, y, circleRadius * 2);
+    var middleCircle = new Shape.Circle(x, y, circleRadius * 3);
     middleCircle.fillColor = 'rgba(2, 2, 2, 0.1)';
-
-    var outerCircle = new Shape.Circle(x, y, circleRadius * 4);
+    var outerCircle = new Shape.Circle(x, y, circleRadius * 5);
     outerCircle.fillColor = 'rgba(2, 2, 2, 0.05)';
+
+    drawnTime = new Date();
 }
 
 
@@ -103,6 +111,7 @@ function drawCrosshair(x, y) {
 function onMouseDown(event) {
     /* TODO:
         FLASH BACKGROUND */
+    var clickedTime = new Date();
     var clickPoint = event.point;
     var crosshairPoint = getCurrentPoint(trial);
     var x1 = event.point.x;
@@ -110,15 +119,20 @@ function onMouseDown(event) {
     var x2 = crosshairPoint.x;
     var y2 = crosshairPoint.y;
     var distance = getDistance(x1, x2, y1, y2);
-    results.push(distance);
+    results.delta.push(distance);
+    results.times.push(clickedTime.getTime() - drawnTime.getTime());
     console.log(results);
 
     if (trial < points.length - 1) {
         trial += 1;
         doCrosshair();
     } else {
-      window.sessionStorage.setItem("distanceResults", results);
+      window.sessionStorage.setItem("distanceResults", results.delta);
+      window.sessionStorage.setItem("timeResults", results.time);
       window.location.href = "http://hdixon.io/interaction-measurements/scroll-results.html"
     }
 
 }
+
+
+init();

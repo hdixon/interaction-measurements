@@ -5,105 +5,73 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Practice</title>
+    <title>Scrolling Test</title>
     <meta name="description" content="Scrolling Test for Interaction Techniques">
     <meta name="author" content="westin@cmu.edu">
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="searchresults.js"></script>
+    <script src="globals.js"></script>
     <link rel="stylesheet" href="reset.css">
     <style type="text/css">
         body {
-            margin: 40px auto;
+            margin: 42vh auto 40px auto;
             max-width: 400px;
             line-height: 1.4;
-            font-size: 1em;
+            /*font-size: 1em;*/
             /*color: #444;*/
-            padding: 0 10px;
+            padding: 0 10px 180px 10px;
             font-family: arial, sans-serif;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+            background-color: #f4f4f4
         }
 
-        #howto {
-            position: fixed;
-            display: inline-block;
-            z-index: 10;
-            top: 0;
-            background-color: #fff;
-            left: 0;
-            padding: 1.2em;
-            color: #222;
-            font-size: 1em;
-            height: 100%;
-            overflow-y: scroll;
-            padding-top: 50px;
+        #instructions {
+          background-color: rgba(255, 255, 255, 0.95);
+          width: 100%;
+          position: fixed;
+          top: 0;
+          left: 0;
+          box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+    /*text-shadow: 1px 1px 0 rgba(255, 255, 255, 1);*/
         }
 
-        #howto span {
-            font-weight: bold;
-            /* font-size: 1.5em; */
-            color: #222;
-            text-align: center;
-            display: block;
-            width: 100%;
-            position: fixed;
-            left: 0;
-            background-color: rgba(235, 242, 242, 0.95);
-            top: 0;
-            padding: 10px 0 10px 0;
-            box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
-            text-shadow: 1px 1px 0 rgba(255, 255, 255, 1);
+        #instructions p {
+          margin: 0.2em 0 0.2em 0;
+          text-align: center;
+          text-transform: uppercase;
+          color: rgba(0, 0, 0, 0.5);
+          font-weight: bold;
         }
 
-        #howto p {
-            font-size: 1em;
-            line-height: 1.5em;
-            margin-top: 0.5em;
-        }
+        #instructions span {
+          font-size: 2em;
+          color: rgba(126, 210, 33, 1);
 
-        #howtoDone {
-            background-color: rgb(81, 100, 168);
-            color: white;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 1.5em;
-            text-align: center;
-            position: fixed;
-            width: 100%;
-            left: 0;
-            bottom: 0;
-            padding: 0.2em;
         }
 
         h1 {
             white-space: nowrap;
             overflow: hidden;
-            font-size: 18px;
-            color: #1a0dab;
-        }
-
-        h2 {
-            color: #006621;
-            font-size: 14px;
-        }
-
-        h3 {
-            color: #545454;
-            font-size: small;
+            /*font-size: 18px;*/
+            color: #222;
+            font-size: 5em;
+            text-align: center;
+            font-weight: bold;
         }
 
         .result {
-            margin-bottom: 23px;
+            /*margin-bottom: 23px;
             max-height: 116px;
-            overflow: hidden;
+            overflow: hidden;*/
+            margin: 2.2em 0 2.2em 0;
         }
 
-        #target.result {
-            background-color: rgba(126, 210, 33, 0.8);
-            border-radius: 3px;
+        #target.result h1{
+            background-color: rgba(126, 210, 33, 0.1);
+            /*color: rgba(126, 210, 33, 0.8);*/
         }
 
         #targetContainer {
@@ -112,7 +80,7 @@
             border: 4px solid rgba(126, 210, 33, 1);
             border-left: none;
             border-right: none;
-            height: 125px;
+            height: 155px;
             display: block;
             top: 50vh;
             left: 50%;
@@ -128,9 +96,9 @@
 <body>
     <script>
         var startTime = new Date().getTime();
-        var targetNumber = 47;
+        var targetNumber = 90;
         console.log("User must click on element " + (targetNumber - 1))
-        for (i = 0; i < searchResults.length; i++) {
+        for (i = 0; i <= 100; i++) {
             var result = document.createElement("div");
             result.className = "result"
             if (i == targetNumber) {
@@ -138,17 +106,17 @@
             }
 
             var h1 = document.createElement("h1");
-            h1.innerHTML = searchResults[i].title
+            h1.innerHTML = i
 
-            var h2 = document.createElement("h2");
-            h2.innerHTML = searchResults[i].url
-
-            var h3 = document.createElement("h3");
-            h3.innerHTML = searchResults[i].desc
+            // var h2 = document.createElement("h2");
+            // h2.innerHTML = "searchResults[i].url"
+            //
+            // var h3 = document.createElement("h3");
+            // h3.innerHTML = "searchResults[i].desc"
 
             result.appendChild(h1)
-            result.appendChild(h2)
-            result.appendChild(h3)
+            // result.appendChild(h2)
+            // result.appendChild(h3)
             document.getElementsByTagName('body')[0].appendChild(result);
         }
         console.log("Document height: ", $(document).height(), "px")
@@ -177,27 +145,7 @@
             };
         })();
     </script>
-    <!-- <div class="result">
-    <h1>Hello From the Same Side – The New Inquiry</h1>
-    <h2>thenewinquiry.com/essays/hello-from-the-same-side/</h2>
-    <h3>margin-ad-right AS 2015 draws to a close, among the two biggest US media spectacles that are not mass shootings are Adele's single “Hello” ...</h3>
-  </div> -->
-    <div id="howto">
-        <span>Directions</span>
-        <p>You are about to be shown a big list of "search results". Your goal is to (as quickly as you can) find the search result with the green background. It looks like this:</p>
-        <br>
-        <img src="example_target.png" style="width: 100%">
-        <p>When you find it, scroll it into the green box within the center of your screen, like this: </p>
-        <br>
-        <img src="example_target_container.gif" style="width: 70%; margin: 0 auto; display: inherit;">
-        <br>
-        <hr>
-        <p style="font-weight: bold;">The first trial is an unmeasured practice run.</p>
-        <p style="margin-bottom: 7em;">To start the test, tap BEGIN below.</p>
-        <div id="howtoDone">
-            Begin
-        </div>
-    </div>
+  <div id="instructions"><p>Scroll to number <span>90</span></p></div>
     <div id="targetContainer"></div>
     <script>
         $("#howtoDone").click(function(){
@@ -254,7 +202,7 @@
                     totalTime: totalTimeSinceTestStart,
                     sinceTargetSeen: totalTimeSinceTargetSeen
                 }));
-                window.location.href = "1.html"
+                // window.location.href = "" PUT THE LOCATION OF THE TEST-MANAGER RESULTS HERE
             }
         }, 1000);
 

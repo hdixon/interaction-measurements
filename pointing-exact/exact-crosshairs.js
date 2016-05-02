@@ -2,6 +2,10 @@
 /* ######## Globals ######## */
 /* ######################### */
 
+// Fitts-Mode toggle
+FITTS_MODE = false;
+FITTS_RADIUS = 30;
+
 // store trial
 trial = 0;
 
@@ -40,12 +44,21 @@ function getDistance(x1, x2, y1, y2) {
 /* ######################### */
 
 function init() {
-    doCrosshair();
+    if (!FITTS_MODE) {
+        doCrosshair();
+    } else {
+        doFitts();
+    }
 }
 
 function doCrosshair() {
     var crosshairPoint = getCurrentPoint(trial);
     drawCrosshair(crosshairPoint.x, crosshairPoint.y);
+}
+
+function doFitts() {
+    var fittsPoint = getCurrentPoint(trial);
+    drawFitts(fittsPoint.x, fittsPoint.y);
 }
 
 function getCurrentPoint(trial) {
@@ -103,6 +116,23 @@ function drawCrosshair(x, y) {
     drawnTime = new Date();
 }
 
+function drawFitts(x, y) {
+    // clears canvas, draws fitts target at x, y
+    // stores the time we draw the target
+
+    clearCanvas();
+
+    var cw = view.bounds.width;
+    var ch = view.bounds.height;
+
+    var targetColor = "#2ECC40";
+    var targetRadius = FITTS_RADIUS;
+    var target = new Shape.Circle(x, y, targetRadius);
+    target.fillColor = targetColor;
+
+    drawnTime = new Date();
+}
+
 
 /* ######################### */
 /* ###### Controller ####### */
@@ -119,13 +149,26 @@ function onMouseDown(event) {
     var x2 = crosshairPoint.x;
     var y2 = crosshairPoint.y;
     var distance = getDistance(x1, x2, y1, y2);
+
+    // CASE: we're doing fitts law so the error can be 0
+    if (FITTS_MODE) {
+        distance -= FITTS_RADIUS;
+        if (distance < 0) {
+            distance = 0;
+        }
+    }
+
     results.delta.push(distance);
     results.times.push(clickedTime.getTime() - drawnTime.getTime());
     console.log(results);
 
     if (trial < points.length - 1) {
         trial += 1;
-        doCrosshair();
+        if (!FITTS_MODE) {
+            doCrosshair();
+        } else {
+            doFitts();
+        }
     } else {
       window.sessionStorage.setItem("distanceResults", results.delta);
       window.sessionStorage.setItem("timeResults", results.time);

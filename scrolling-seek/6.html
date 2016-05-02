@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Practice</title>
+    <title>Scrolling Test</title>
     <meta name="description" content="Scrolling Test for Interaction Techniques">
     <meta name="author" content="westin@cmu.edu">
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
@@ -25,57 +25,6 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
-        }
-
-        #howto {
-            position: fixed;
-            display: inline-block;
-            z-index: 10;
-            top: 0;
-            background-color: #fff;
-            left: 0;
-            padding: 1.2em;
-            color: #222;
-            font-size: 1em;
-            height: 100%;
-            overflow-y: scroll;
-            padding-top: 50px;
-        }
-
-        #howto span {
-            font-weight: bold;
-            /* font-size: 1.5em; */
-            color: #222;
-            text-align: center;
-            display: block;
-            width: 100%;
-            position: fixed;
-            left: 0;
-            background-color: rgba(235, 242, 242, 0.95);
-            top: 0;
-            padding: 10px 0 10px 0;
-            box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
-            text-shadow: 1px 1px 0 rgba(255, 255, 255, 1);
-        }
-
-        #howto p {
-            font-size: 1em;
-            line-height: 1.5em;
-            margin-top: 0.5em;
-        }
-
-        #howtoDone {
-            background-color: rgb(81, 100, 168);
-            color: white;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 1.5em;
-            text-align: center;
-            position: fixed;
-            width: 100%;
-            left: 0;
-            bottom: 0;
-            padding: 0.2em;
         }
 
         h1 {
@@ -128,7 +77,7 @@
 <body>
     <script>
         var startTime = new Date().getTime();
-        var targetNumber = 47;
+        var targetNumber = 79;
         console.log("User must click on element " + (targetNumber - 1))
         for (i = 0; i < searchResults.length; i++) {
             var result = document.createElement("div");
@@ -182,27 +131,8 @@
     <h2>thenewinquiry.com/essays/hello-from-the-same-side/</h2>
     <h3>margin-ad-right AS 2015 draws to a close, among the two biggest US media spectacles that are not mass shootings are Adele's single “Hello” ...</h3>
   </div> -->
-    <div id="howto">
-        <span>Directions</span>
-        <p>You are about to be shown a big list of "search results". Your goal is to (as quickly as you can) find the search result with the green background. It looks like this:</p>
-        <br>
-        <img src="example_target.png" style="width: 100%">
-        <p>When you find it, scroll it into the green box within the center of your screen, like this: </p>
-        <br>
-        <img src="example_target_container.gif" style="width: 70%; margin: 0 auto; display: inherit;">
-        <br>
-        <hr>
-        <p style="font-weight: bold;">The first trial is an unmeasured practice run.</p>
-        <p style="margin-bottom: 7em;">To start the test, tap BEGIN below.</p>
-        <div id="howtoDone">
-            Begin
-        </div>
-    </div>
     <div id="targetContainer"></div>
     <script>
-        $("#howtoDone").click(function(){
-          $("#howto").css("display", "none")
-        })
         function isElementInViewport(el) {
 
             //special bonus for those using jQuery
@@ -221,9 +151,9 @@
         }
 
         $(window).on('load resize scroll', function() {
-            if (isElementInViewport($("#target")[0]) && targetFirstSeen == -1) {
-                targetFirstSeen = new Date().getTime()
-            }
+          if(isElementInViewport($("#target")[0]) && targetFirstSeen == -1){
+            targetFirstSeen = new Date().getTime()
+          }
 
         });
 
@@ -243,18 +173,14 @@
 
         $(window).scrollEnd(function() {
             if (overlaps("#target", "#targetContainer")) {
-                $("body").css("background-color", "rgba(126,210,33,0.3)")
-                    // current time - when the target first entered the viewport - 1000 timeout for selecting the target
-                    // PS there is a margin of error of about +- up to 8ms due to how the page loads
+                // current time - when the target first entered the viewport - 1000 timeout for selecting the target
+                // PS there is a margin of error of about +- up to 8ms due to how the page loads
                 var totalTimeSinceTargetSeen = new Date().getTime() - targetFirstSeen - 1000
                 var totalTimeSinceTestStart = new Date().getTime() - startTime - 1000
                 console.log("Selected target after", totalTimeSinceTargetSeen, "ms")
                 console.log("It took a total of", totalTimeSinceTestStart, "ms to select it")
-                window.sessionStorage.setItem("test1", JSON.stringify({
-                    totalTime: totalTimeSinceTestStart,
-                    sinceTargetSeen: totalTimeSinceTargetSeen
-                }));
-                window.location.href = "1.html"
+                window.sessionStorage.setItem("test4", JSON.stringify({totalTime: totalTimeSinceTestStart, sinceTargetSeen: totalTimeSinceTargetSeen}));
+                window.location.href = "7.html"
             }
         }, 1000);
 

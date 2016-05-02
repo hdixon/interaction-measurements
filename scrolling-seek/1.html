@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>1</title>
+    <title>Scrolling Test</title>
     <meta name="description" content="Scrolling Test for Interaction Techniques">
     <meta name="author" content="westin@cmu.edu">
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
@@ -77,7 +77,7 @@
 <body>
     <script>
         var startTime = new Date().getTime();
-        var targetNumber = 47;
+        var targetNumber = 67;
         console.log("User must click on element " + (targetNumber - 1))
         for (i = 0; i < searchResults.length; i++) {
             var result = document.createElement("div");
@@ -180,7 +180,7 @@
                 console.log("Selected target after", totalTimeSinceTargetSeen, "ms")
                 console.log("It took a total of", totalTimeSinceTestStart, "ms to select it")
                 window.sessionStorage.setItem("test1", JSON.stringify({totalTime: totalTimeSinceTestStart, sinceTargetSeen: totalTimeSinceTargetSeen}));
-                window.location.href = "http://hdixon.io/interaction-measurements/tests/2.html"
+                window.location.href = "2.html"
             }
         }, 1000);
 

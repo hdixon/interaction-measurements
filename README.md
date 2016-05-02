@@ -1,9 +1,5 @@
-_Interaction Techniques Final Project_
-
-_Westin Lohne, Max Harlynking, Henry Dixon, Eileen Jiang_
-
-__Files__
-[4/6 Interim Report](https://docs.google.com/document/d/1ooGU8PtBHSAEaw0pwE8ps9a6Ql0EpBSfJxlLM-Ne7VM/edit?usp=sharing)
+__Testing Pointing & Scrolling Interactions__
+with _Westin Lohne, Max Harlynking, Henry Dixon, Eileen Jiang_
 
 __Structure__
 The source code for each test lives in its own separate subdirectory. The index.html of each subdirectory is the test itself, and all dependancies are contained within the subdirectory. Each test includes the onboarding process which teaches the user how to use the test.

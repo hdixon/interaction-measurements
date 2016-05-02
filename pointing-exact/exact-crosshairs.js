@@ -15,17 +15,15 @@ results.times = []; // time from mouse movement to click
 results.delta = []; // error distance
 
 // constant list of points to move the cursor to
-var p1 = [1/4, 1/4]; // top left
-var p2 = [3/4, 1/4]; // top right
-var p3 = [3/4, 3/4]; // bottom right
-var p4 = [1/4, 3/4]; // bottom left
-var p5 = [1/2, 1/2]; // center
-var p6 = [1/8, 1/8];
-var p7 = [7/8, 1/8];
-var p8 = [1/8, 7/8];
-var p9 = [7/8, 7/8];
-points = [p1, p2, p3, p4, p5];
+var opt1 = [[1/4, 1/4], [3/4, 1/4], [3/4, 3/4], [1/4, 3/4], [1/4, 1/2], [1/2, 1/2], [1/2, 3/4], [7/8, 3/4]];
+var opt2 = [[3/4, 3/4], [3/4, 1/4], [1/4, 1/4], [1/4, 3/4], [1/4, 1/6], [1/6, 1/6], [1/6, 3/4], [5/6, 3/4]];
+var opt3 = [[1/2, 1/2], [1/2, 3/8], [2/9, 3/8], [9/10, 3/8], [1/2, 3/8], [1/2, 3/4], [1/9, 3/4], [1/9, 2/10]];
+var opt4 = [[8/9, 3/8], [1/30, 3/8], [1/23, 3/8], [1/23, 4/12], [3/5, 4/12], [3/5, 3/4], [3/5, 3/4], [3/4, 3/4]];
+var opt5 = [[6/9, 5/6], [3/4, 5/6], [3/4, 2/3], [1/2, 2/3], [3/8, 2/3], [3/8, 1/2], [1/12, 1/2], [1/12, 3/7]];
+var opt6 = [[1/3, 2/3], [2/3, 2/3], [2/3, 3/14], [3/14, 3/14], [3/14, 1/5], [3/4, 1/5], [3/4, 3/4], [3/4, 1/3]];
+var options = [opt1, opt2, opt3, opt4, opt5, opt6];
 
+points = shuffle(options)[0];
 
 /* ######################### */
 /* ######## Helpers ######## */
@@ -38,6 +36,24 @@ function getDistance(x1, x2, y1, y2) {
     return Math.sqrt(a*a + b*b);
 }
 
+function shuffle(array) {
+  // http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
 
 /* ######################### */
 /* ######### Model ######### */

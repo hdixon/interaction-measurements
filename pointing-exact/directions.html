@@ -1,0 +1,78 @@
+<style>
+#howto {
+    position: fixed;
+    display: inline-block;
+    z-index: 10;
+    top: 0;
+    background-color: #fff;
+    left: 0;
+    padding: 1.2em;
+    color: #222;
+    font-size: 1em;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    padding-top: 50px;
+}
+#howto span {
+    font-weight: bold;
+    /* font-size: 1.5em; */
+    color: #222;
+    text-align: center;
+    display: block;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    background-color: rgba(235, 242, 242, 0.95);
+    top: 0;
+    padding: 10px 0 10px 0;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 1);
+}
+#howto p {
+    font-size: 1em;
+    line-height: 1.5em;
+    margin-top: 0.5em;
+    max-width: 400px;
+    margin: 0 auto;
+}
+#howto img {
+  max-width: 400px;
+  margin: 0 auto;
+  display: block;
+}
+#howtoDone {
+    background-color: rgb(81, 100, 168);
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    padding: 0.2em;
+}
+</style>
+
+
+
+<div id="howto">
+    <span>Directions</span>
+    <p>You are about to see a series of targets, one at a time. Working as quickly and accurately as you can, your goal is to click on the target. It looks like this:</p>
+    <br>
+    <img src="pointing-howto.gif" style="width: 100%">
+    <hr>
+    <p style="font-weight: bold;">The first trial is an unmeasured practice run.</p>
+    <p style="margin-bottom: 7em;">To start the test, tap BEGIN below.</p>
+    <div id="howtoDone">
+        Begin
+    </div>
+</div>
+
+<script>
+$("#howtoDone").click(function(){
+  $("#howto").css("display", "none")
+})
+</script>
